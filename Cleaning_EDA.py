@@ -31,11 +31,8 @@ categorical_data = df.select_dtypes('object')
 print(numeric_data)
 print(categorical_data)
 
-print(numeric_data.columns)
-print(categorical_data.columns)
-
 # Year Built
-fig = px.histogram(df, x='YearBuilt', marginal='box', nbins= 20, title='Distribution of Year Built')
+fig = px.histogram(df, x='YearBuilt', marginal='box', nbins= 5, title='Distribution of Year Built')
 fig.update_layout(bargap=0.1)
 fig.show()
 
@@ -48,3 +45,32 @@ fig.show()
 fig=px.scatter(df, x='YrSold', y='MoSold', color='OverallQual',
            opacity=0.5, title='Year vs Month of Sales').update_traces(marker_size=5)
 fig.show()
+
+# SalePrice vs Street
+fig=px.histogram(df, x='Street', y='SalePrice', marginal='box', title='SalePrice vs Street').update_layout(bargap=0.1)
+fig.show()
+
+
+def unique_vals(df, column_type):
+    for i in column_type:
+        print(df[i])
+
+print(unique_vals(categorical_data, categorical_data.columns))
+
+print(numeric_data.columns)
+print(categorical_data.columns)
+
+# Creating a validation set using train set
+train_df = df.copy()
+years = pd.to_datetime(train_df.YrSold).dt.year
+months = pd.to_datetime(train_df.MoSold).dt.month
+
+# Using Test Val split
+from sklearn.model_selection import train_test_split
+val_df, train_df = train_test_split(df, test_size=0.3, random_state=42)
+
+print(train_df)
+print(val_df)
+
+train_df.to_csv('train_df')
+val_df.to_csv('val_df')
