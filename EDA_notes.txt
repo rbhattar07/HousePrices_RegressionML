@@ -1,0 +1,6 @@
+Year Built
+Start = 1872 Median = 1973 Max = 2012
+The distribution of data is not equal in term of records and year
+
+Year Sold
+Most of the houses were sold between 2006 & 2010
