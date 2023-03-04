@@ -22,14 +22,18 @@ print(raw_df)
 print(raw_df.info())
 print(raw_df.describe())
 
-# Setting numeric and categorical columns
-numeric_columns = raw_df.select_dtypes(include=np.number).columns.tolist()
-categorical_columns = raw_df.select_dtypes('object').columns.tolist()
-
-print('Missing numeric columns')
-print(raw_df[numeric_columns].isna().sum())
-print('Missing Categorical Columns')
-print(raw_df[categorical_columns].isna().sum())
-
 df = raw_df.copy()
 df.drop_duplicates(inplace=True)
+df.drop(columns=['MiscFeature', 'Fence', 'PoolQC', 'Alley'], inplace=True)
+
+# Setting numeric and categorical columns
+numeric_columns = df.select_dtypes(include=np.number).columns.tolist()
+categorical_columns = df.select_dtypes('object').columns.tolist()
+
+
+# EDA- Exploratory Data Analysis
+
+print('Numeric Columns:')
+print(df[numeric_columns].columns)
+print('Categorical Columns:')
+print(df[categorical_columns].columns)
