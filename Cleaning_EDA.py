@@ -42,14 +42,16 @@ fig = px.scatter(df, x='YrSold',
                  y='MoSold',
                  color='SaleCondition',
                  opacity=0.5,
-                 hover_data=['SalePrice']).update_traces(marker_size=6)
+                 hover_data=['SalePrice'],
+                 title='Yrsold vs Mosold').update_traces(marker_size=6)
 fig.show()
 
 fig = px.scatter(df, x='LotArea',
                  y='SalePrice',
                  color='SaleCondition',
                  opacity=0.5,
-                 hover_data=['YrSold']).update_traces(marker_size=6)
+                 hover_data=['YrSold'],
+                 title='Lot area vs Sale Price').update_traces(marker_size=6)
 fig.show()
 
 fig = px.scatter(df, x='LotArea',
@@ -63,5 +65,76 @@ fig = px.scatter(df, x='GarageYrBlt',
                  y='GarageArea',
                  color='GarageCond',
                  opacity=0.5,
-                 hover_data=['SalePrice']).update_traces(marker_size=6)
+                 hover_data=['SalePrice'],
+                 title='Lot are vs lot frontage').update_traces(marker_size=6)
 fig.show()
+
+fig = px.scatter(df, x='GarageYrBlt',
+                 y='GarageArea',
+                 color='GarageCond',
+                 opacity=0.5,
+                 hover_data=['SalePrice'],
+                 title='Lot are vs lot frontage').update_traces(marker_size=6)
+fig.show()
+
+fig = px.histogram(df,
+                   x='SalePrice',
+                   marginal='box',
+                   nbins = 25,
+                   title='Distribution of SalePrice').update_layout(bargap=0.1)
+fig.show()
+
+fig = px.scatter(df, x='FullBath',
+                 y='HalfBath',
+                 color='Neighborhood',
+                 opacity=0.5,
+                 hover_data=['SalePrice'],
+                 title='Full Bath vs Half Bath').update_traces(marker_size=6)
+fig.show()
+
+fig = px.scatter(df, x='BsmtFullBath',
+                 y='BsmtHalfBath',
+                 color='Neighborhood',
+                 opacity=0.5,
+                 hover_data=['SalePrice'],
+                 title='Basement full vs half bath').update_traces(marker_size=6)
+fig.show()
+
+fig = px.scatter(df, x='YearBuilt',
+                 y='YearRemodAdd',
+                 color='Neighborhood',
+                 opacity=0.5,
+                 hover_data=['SalePrice'],
+                 title='Yearbuilt vs year remodelling in NEIGHBORHOOD').update_traces(marker_size=6)
+fig.show()
+
+fig = px.histogram(df,
+                   x='Neighborhood',
+                   y='SalePrice',
+                   marginal='box',
+                   nbins = 25,
+                   title='Distribution of Neighborhood & SalePrice').update_layout(bargap=0.1)
+fig.show()
+
+fig = px.scatter(df, x='OverallQual',
+                 y='OverallCond',
+                 color='SalePrice',
+                 opacity=0.5,
+                 hover_data=['Neighborhood'],
+                 title='Neighborhood wise condition & Quality').update_traces(marker_size=6)
+fig.show()
+
+fig = px.scatter(df, x='OverallQual',
+                 y='SalePrice',
+                 color='Neighborhood',
+                 opacity=0.5,
+                 title='Overall Quality vs Saleprice').update_traces(marker_size=6)
+fig.show()
+
+fig = px.scatter(df, x='OverallCond',
+                 y='SalePrice',
+                 color='Neighborhood',
+                 opacity=0.5,
+                 title='Overall Condition vs Sale pRICE').update_traces(marker_size=6)
+fig.show()
+
