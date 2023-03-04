@@ -37,3 +37,31 @@ print('Numeric Columns:')
 print(df[numeric_columns].columns)
 print('Categorical Columns:')
 print(df[categorical_columns].columns)
+
+fig = px.scatter(df, x='YrSold',
+                 y='MoSold',
+                 color='SaleCondition',
+                 opacity=0.5,
+                 hover_data=['SalePrice']).update_traces(marker_size=6)
+fig.show()
+
+fig = px.scatter(df, x='LotArea',
+                 y='SalePrice',
+                 color='SaleCondition',
+                 opacity=0.5,
+                 hover_data=['YrSold']).update_traces(marker_size=6)
+fig.show()
+
+fig = px.scatter(df, x='LotArea',
+                 y='LotFrontage',
+                 color='GarageType',
+                 opacity=0.5,
+                 hover_data=['SalePrice']).update_traces(marker_size=6)
+fig.show()
+
+fig = px.scatter(df, x='GarageYrBlt',
+                 y='GarageArea',
+                 color='GarageCond',
+                 opacity=0.5,
+                 hover_data=['SalePrice']).update_traces(marker_size=6)
+fig.show()
