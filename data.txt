@@ -1,0 +1,2 @@
+The data has 1460 rows and 81 columns
+It consists of dtypes: float64, int64 and object
