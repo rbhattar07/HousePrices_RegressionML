@@ -153,8 +153,8 @@ fig = px.histogram(df, x='LotFrontage', nbins=25, marginal='box', title='Distrib
 )
 fig.show()
 
-fig = px.bar(df, x='GarageYrBlt', )
-
+fig = px.violin(df, x='GarageYrBlt', box=True, points='all')
+fig.show()
 
 df.drop(columns=['FireplaceQu', 'Id'], inplace=True)
 

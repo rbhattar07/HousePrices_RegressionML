@@ -24,3 +24,10 @@ categorical_cols = train_inputs.select_dtypes('object').columns.tolist()
 
 # Imputing missing numerical data
 print(train_inputs[numerical_cols].isna().sum())
+from sklearn.impute import SimpleImputer
+imputer = SimpleImputer(strategy='mean')
+imputer.fit(train_inputs[numerical_cols])
+train_inputs[numerical_cols] = imputer.transform(train_inputs[numerical_cols])
+val_inputs[numerical_cols] = imputer.transform(val_inputs[numerical_cols])
+
+# Scaling Numeric Features
