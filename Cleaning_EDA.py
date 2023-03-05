@@ -138,14 +138,12 @@ fig = px.scatter(df, x='OverallCond',
                  title='Overall Condition vs Sale pRICE').update_traces(marker_size=6)
 fig.show()
 
-
+for i in df[categorical_columns]:
+    print(df[i].value_counts())
 
 # Creating training and validation sets
 from sklearn.model_selection import train_test_split
 train_df, val_df = train_test_split(df, test_size=0.60, random_state=42)
-
-print(train_df)
-print(val_df)
 
 train_df.to_csv('train_df.csv')
 val_df.to_csv('val_df.csv')
