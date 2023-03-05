@@ -141,6 +141,23 @@ fig.show()
 for i in df[categorical_columns]:
     print(df[i].value_counts())
 
+print(df.isna().sum())
+
+fig = px.histogram(df, x='FireplaceQu', nbins=6, marginal='box', title='Distribution of Fire Place Quality').update_layout(
+    bargap=0.1
+)
+fig.show()
+
+fig = px.histogram(df, x='LotFrontage', nbins=25, marginal='box', title='Distribution of Lot Frontage').update_layout(
+    bargap=0.1
+)
+fig.show()
+
+fig = px.bar(df, x='GarageYrBlt', )
+
+
+df.drop(columns=['FireplaceQu', 'Id'], inplace=True)
+
 # Creating training and validation sets
 from sklearn.model_selection import train_test_split
 train_df, val_df = train_test_split(df, test_size=0.60, random_state=42)
