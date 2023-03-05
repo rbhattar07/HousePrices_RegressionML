@@ -31,3 +31,21 @@ train_inputs[numerical_cols] = imputer.transform(train_inputs[numerical_cols])
 val_inputs[numerical_cols] = imputer.transform(val_inputs[numerical_cols])
 
 # Scaling Numeric Features
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler(feature_range=(0,1))
+scaler.fit(train_inputs[numerical_cols])
+train_inputs[numerical_cols]= scaler.transform(train_inputs[numerical_cols])
+val_inputs[numerical_cols]=scaler.transform(val_inputs[numerical_cols])
+
+# Encoding Categorical data
+from sklearn.preprocessing import OneHotEncoder
+encoder = OneHotEncoder(sparse=False, handle_unknown='ignore')
+encoder.fit(train_inputs[categorical_cols])
+encoded_cols = list(encoder.get_feature_names_out(categorical_cols))
+train_inputs[encoded_cols] = encoder.transform(train_inputs[categorical_cols])
+val_inputs[encoded_cols] = encoder.transform(val_inputs[categorical_cols])
+
+# Model Building
+#----- LR model
+from sklearn.linear_model import LinearRegression
+lr = LinearRegression().fit(train_inputs[numerical_cols+encoded_cols], train_target)

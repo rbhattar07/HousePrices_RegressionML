@@ -22,14 +22,22 @@ print(raw_df)
 print(raw_df.info())
 print(raw_df.describe())
 
+
+
 df = raw_df.copy()
 df.drop_duplicates(inplace=True)
 df.drop(columns=['MiscFeature', 'Fence', 'PoolQC', 'Alley'], inplace=True)
 
+fig = px.histogram(df, x='FireplaceQu', nbins=6, marginal='box', title='Distribution of Fire Place Quality').update_layout(
+    bargap=0.1
+)
+fig.show()
+
+df.drop(columns=['FireplaceQu', 'Id'], inplace=True)
+
 # Setting numeric and categorical columns
 numeric_columns = df.select_dtypes(include=np.number).columns.tolist()
 categorical_columns = df.select_dtypes('object').columns.tolist()
-
 
 # EDA- Exploratory Data Analysis
 
@@ -143,10 +151,7 @@ for i in df[categorical_columns]:
 
 print(df.isna().sum())
 
-fig = px.histogram(df, x='FireplaceQu', nbins=6, marginal='box', title='Distribution of Fire Place Quality').update_layout(
-    bargap=0.1
-)
-fig.show()
+
 
 fig = px.histogram(df, x='LotFrontage', nbins=25, marginal='box', title='Distribution of Lot Frontage').update_layout(
     bargap=0.1
@@ -156,8 +161,6 @@ fig.show()
 fig = px.violin(df, x='GarageYrBlt', box=True, points='all')
 fig.show()
 
-df.drop(columns=['FireplaceQu', 'Id'], inplace=True)
-
 # Creating training and validation sets
 from sklearn.model_selection import train_test_split
 train_df, val_df = train_test_split(df, test_size=0.60, random_state=42)
@@ -165,4 +168,4 @@ train_df, val_df = train_test_split(df, test_size=0.60, random_state=42)
 train_df.to_csv('train_df.csv')
 val_df.to_csv('val_df.csv')
 
-
+print(df[categorical_columns].isna().sum())
