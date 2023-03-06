@@ -5,6 +5,17 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import joblib
 
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error, accuracy_score
+
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Ridge
+from sklearn.linear_model import Lasso
+from sklearn.linear_model import ElasticNet
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.svm import SVR
+from xgboost import XGBRegressor
+from sklearn.preprocessing import PolynomialFeatures
+
 train_df = pd.read_csv('train_df.csv')
 val_df = pd.read_csv('val_df.csv')
 
@@ -46,15 +57,21 @@ train_inputs[encoded_cols] = encoder.transform(train_inputs[categorical_cols])
 val_inputs[encoded_cols] = encoder.transform(val_inputs[categorical_cols])
 
 train_inputs = pd.concat([train_inputs[numerical_cols], train_inputs[encoded_cols]], axis=1)
-val_inputs = pd.concat([val_inputs[numerical_cols], val_inputs[encoded_cols]], axis=1
-                       )
-# Model Building
-#----- LR model
-from sklearn.linear_model import LinearRegression
-lr = LinearRegression().fit(train_inputs, train_target)
-lr_preds = lr.predict(train_inputs)
-print(lr_preds)
-from sklearn.metrics import accuracy_score
-print(accuracy_score(train_target, lr_preds, normalize=True))
-from sklearn.metrics import confusion_matrix
-print(confusion_matrix(train_target, lr_preds, normalize='true'))
+val_inputs = pd.concat([val_inputs[numerical_cols], val_inputs[encoded_cols]], axis=1)
+
+df = {
+    'input_columns':input_cols,
+    'target_columns':target_cols,
+    'numeric_columns':numerical_cols,
+    'categorical_columns':categorical_cols,
+    'encoded_columns':encoded_cols,
+    'imputer':imputer,
+    'scaler':scaler,
+    'encoder':encoder,
+    'train_inputs':train_inputs,
+    'val_inputs':val_inputs,
+    'train_target':train_target,
+    'val_target':val_target
+}
+
+joblib.dump(df, 'train_val.joblib')
