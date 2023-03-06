@@ -81,7 +81,7 @@ print('MAPE',mape)
 print('-'*30)
 
 # Lasso
-lasso = Lasso().fit(train_inputs, train_target)
+lasso = Lasso(max_iter=1000).fit(train_inputs, train_target)
 train_preds= lasso.predict(train_inputs)
 val_preds= lasso.predict(val_inputs)
 
@@ -94,3 +94,64 @@ print('MXE',mxe)
 print('r2s',r2s)
 print('MAPE',mape)
 print('-'*30)
+
+# Elastic Net
+en = ElasticNet().fit(train_inputs, train_target)
+train_preds= en.predict(train_inputs)
+val_preds= en.predict(val_inputs)
+
+print('Elastic Net:')
+print('Val evaluation:')
+mae, mse, mxe, r2s, mape = evaluation(val_target, val_preds)
+print('MAE',mae)
+print('MSE',mse)
+print('MXE',mxe)
+print('r2s',r2s)
+print('MAPE',mape)
+print('-'*30)
+
+# Random Forest Regressor
+rfr = RandomForestRegressor().fit(train_inputs, train_target)
+train_preds= rfr.predict(train_inputs)
+val_preds= rfr.predict(val_inputs)
+
+print('Random Forest Regressor')
+print('Val evaluation:')
+mae, mse, mxe, r2s, mape = evaluation(val_target, val_preds)
+print('MAE',mae)
+print('MSE',mse)
+print('MXE',mxe)
+print('r2s',r2s)
+print('MAPE',mape)
+print('-'*30)
+
+# SVR
+svr = SVR().fit(train_inputs, train_target)
+train_preds= svr.predict(train_inputs)
+val_preds= svr.predict(val_inputs)
+
+print('SVR')
+print('Val evaluation:')
+mae, mse, mxe, r2s, mape = evaluation(val_target, val_preds)
+print('MAE',mae)
+print('MSE',mse)
+print('MXE',mxe)
+print('r2s',r2s)
+print('MAPE',mape)
+print('-'*30)
+
+# XGB REGRESSOR
+xgb = XGBRegressor().fit(train_inputs, train_target)
+train_preds= xgb.predict(train_inputs)
+val_preds= xgb.predict(val_inputs)
+
+print('XGBRegressor')
+print('Val evaluation:')
+mae, mse, mxe, r2s, mape = evaluation(val_target, val_preds)
+print('MAE',mae)
+print('MSE',mse)
+print('MXE',mxe)
+print('r2s',r2s)
+print('MAPE',mape)
+print('-'*30)
+
