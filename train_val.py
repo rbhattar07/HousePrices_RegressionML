@@ -45,7 +45,16 @@ encoded_cols = list(encoder.get_feature_names_out(categorical_cols))
 train_inputs[encoded_cols] = encoder.transform(train_inputs[categorical_cols])
 val_inputs[encoded_cols] = encoder.transform(val_inputs[categorical_cols])
 
+train_inputs = pd.concat([train_inputs[numerical_cols], train_inputs[encoded_cols]], axis=1)
+val_inputs = pd.concat([val_inputs[numerical_cols], val_inputs[encoded_cols]], axis=1
+                       )
 # Model Building
 #----- LR model
 from sklearn.linear_model import LinearRegression
-lr = LinearRegression().fit(train_inputs[numerical_cols+encoded_cols], train_target)
+lr = LinearRegression().fit(train_inputs, train_target)
+lr_preds = lr.predict(train_inputs)
+print(lr_preds)
+from sklearn.metrics import accuracy_score
+print(accuracy_score(train_target, lr_preds, normalize=True))
+from sklearn.metrics import confusion_matrix
+print(confusion_matrix(train_target, lr_preds, normalize='true'))
