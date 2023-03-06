@@ -66,7 +66,7 @@ print('-'*30)
 
 # Ridge regression
 
-ridge = Ridge(solver='svd').fit(train_inputs, train_target)
+ridge = Ridge(solver='lbfgs', positive=True).fit(train_inputs, train_target)
 train_preds= ridge.predict(train_inputs)
 val_preds= ridge.predict(val_inputs)
 
@@ -154,4 +154,3 @@ print('MXE',mxe)
 print('r2s',r2s)
 print('MAPE',mape)
 print('-'*30)
-
