@@ -81,7 +81,7 @@ print('MAPE',mape)
 print('-'*30)
 
 # Lasso
-lasso = Lasso(max_iter=1000).fit(train_inputs, train_target)
+lasso = Lasso(max_iter=1000, precompute=False).fit(train_inputs, train_target)
 train_preds= lasso.predict(train_inputs)
 val_preds= lasso.predict(val_inputs)
 
@@ -96,7 +96,7 @@ print('MAPE',mape)
 print('-'*30)
 
 # Elastic Net
-en = ElasticNet().fit(train_inputs, train_target)
+en = ElasticNet(l1_ratio=1, max_iter=2500).fit(train_inputs, train_target)
 train_preds= en.predict(train_inputs)
 val_preds= en.predict(val_inputs)
 
@@ -111,7 +111,7 @@ print('MAPE',mape)
 print('-'*30)
 
 # Random Forest Regressor
-rfr = RandomForestRegressor().fit(train_inputs, train_target)
+rfr = RandomForestRegressor(n_estimators=110, min_samples_leaf=4, min_impurity_decrease=250, verbose=1).fit(train_inputs, train_target)
 train_preds= rfr.predict(train_inputs)
 val_preds= rfr.predict(val_inputs)
 
