@@ -126,7 +126,7 @@ print('MAPE',mape)
 print('-'*30)
 
 # SVR
-svr = SVR().fit(train_inputs, train_target)
+svr = SVR(kernel='linear').fit(train_inputs, train_target)
 train_preds= svr.predict(train_inputs)
 val_preds= svr.predict(val_inputs)
 
@@ -141,7 +141,7 @@ print('MAPE',mape)
 print('-'*30)
 
 # XGB REGRESSOR
-xgb = XGBRegressor().fit(train_inputs, train_target)
+xgb = XGBRegressor(learning_rate=0.2, max_depth=4).fit(train_inputs, train_target)
 train_preds= xgb.predict(train_inputs)
 val_preds= xgb.predict(val_inputs)
 
@@ -154,3 +154,19 @@ print('MXE',mxe)
 print('r2s',r2s)
 print('MAPE',mape)
 print('-'*30)
+
+models = {
+    'Linear_Regression':lr,
+    'ridge':ridge,
+    'lasso':lasso,
+    'elastic_net':en,
+    'randomforestregressor':rfr,
+    'svr':svr,
+    'xgbregressor':xgb,
+    'train_inputs':train_inputs,
+    'train_target':train_target,
+    'val_inputs':val_inputs,
+    'val_target':val_target
+}
+
+joblib.dump(models, 'TV_models.joblib')
