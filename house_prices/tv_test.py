@@ -17,38 +17,3 @@ from sklearn.svm import SVR
 from xgboost import XGBRegressor
 from sklearn.preprocessing import PolynomialFeatures
 
-tv = joblib.load('TV_models.joblib')
-df = joblib.load('train_val.joblib')
-test_df = pd.read_csv('test.csv')
-# loading elements
-train_inputs = df['train_inputs']
-val_inputs = df['val_inputs']
-train_target = df['train_target']
-val_target = df['val_target']
-scaler = df['scaler']
-imputer = df['imputer']
-encoder = df['encoder']
-input_cols = df['input_columns']
-target_cols = df['target_columns']
-numeric_cols= df['numeric_columns']
-categorical_cols= df['categorical_columns']
-encoded_cols = df['encoded_columns']
-# Loading Models
-lr = tv['Linear_Regression']
-ridge = tv['ridge']
-lasso = tv['lasso']
-en= tv['elastic_net']
-rfr = tv['randomforestregressor']
-svr = tv['svr']
-xgbregressor = tv['xgbregressor']
-train_target = tv['train_target']
-val_target = tv['val_target']
-
-# imputing missing data
-test_df[numeric_cols] = imputer.transform(test_df[numeric_cols])
-# Scaling numeric features
-test_df[numeric_cols] = scaler.transform(test_df[numeric_cols])
-# Encoding Categorical Columns
-test_df[encoded_cols] = encoder.transform(test_df[categorical_cols])
-
-test_df.to_csv('updated_test_df.csv')
