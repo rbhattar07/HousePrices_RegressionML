@@ -18,6 +18,8 @@ from xgboost import XGBRegressor
 
 df = pd.read_csv('test.csv')
 df.drop(columns=['MiscFeature', 'Fence', 'PoolQC','FireplaceQu', 'Alley', 'Id'], inplace=True)
+dfx = pd.read_csv('train.csv')
+dfx.drop(columns=['MiscFeature', 'Fence', 'PoolQC','FireplaceQu', 'Alley', 'Id'], inplace=True)
 
 numerical_cols = df.select_dtypes(include=np.number).columns.tolist()
 categorical_cols = df.select_dtypes('object').columns.tolist()
@@ -27,20 +29,25 @@ from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 imputer = IterativeImputer(max_iter=10, random_state=0).fit(df[numerical_cols])
 df[numerical_cols] = imputer.transform(df[numerical_cols])
+dfx[numerical_cols] = imputer.transform(dfx[numerical_cols])
 
 # Scaling Numeric Features
 from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler().fit(df[numerical_cols])
 df[numerical_cols] = scaler.transform(df[numerical_cols])
+dfx[numerical_cols] = scaler.transform(dfx[numerical_cols])
 
 # Encoding Categorical columns
 from sklearn.preprocessing import OneHotEncoder
 encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore').fit(df[categorical_cols])
 encoded_cols = list(encoder.get_feature_names_out(categorical_cols))
 df[encoded_cols] = encoder.transform(df[categorical_cols])
+dfx[encoded_cols] = encoder.transform(dfx[categorical_cols])
 
 df1 = df.copy()
-
+df2 = dfx.copy()
 df1 = pd.concat([df1[numerical_cols], df1[encoded_cols]], axis=1)
+df2 = pd.concat([df2[numerical_cols], df2[encoded_cols]], axis=1)
 
 df1.to_csv('testv2.csv')
+df2.to_csv('trainv2.csv')
