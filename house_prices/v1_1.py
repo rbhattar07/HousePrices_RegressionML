@@ -135,3 +135,5 @@ print('MXE',mxe)
 print('r2s',r2s)
 print('MAPE',mape)
 print('-'*30)
+
+print(r2_score(target, xgb_preds))
