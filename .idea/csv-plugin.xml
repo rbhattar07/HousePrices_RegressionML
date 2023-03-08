@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\house_prices\train.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
