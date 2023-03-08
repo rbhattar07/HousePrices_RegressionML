@@ -75,3 +75,4 @@ df = {
 }
 
 joblib.dump(df, 'train_val.joblib')
+print(train_inputs)

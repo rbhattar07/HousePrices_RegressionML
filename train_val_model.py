@@ -170,3 +170,6 @@ models = {
 }
 
 joblib.dump(models, 'TV_models.joblib')
+
+print(train_inputs)
+print(val_inputs)
