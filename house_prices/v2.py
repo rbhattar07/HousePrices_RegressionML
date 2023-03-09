@@ -118,7 +118,7 @@ print('MAPE',mape)
 print('-'*30)
 
 # XGB Regressor
-xgb = XGBRegressor().fit(train_inputs, train_target)
+xgb = XGBRegressor(min_child_weight=3).fit(train_inputs, train_target)
 val_preds = xgb.predict(val_inputs)
 print('XGB Regressor: ')
 mae, mse, mxe, r2s, mape = evaluation(val_target, val_preds)
