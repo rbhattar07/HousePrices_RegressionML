@@ -40,7 +40,9 @@ categorical_cols.remove('Alley')
 
 selected_num_cols = list(df.corr()["SalePrice"][(df.corr()["SalePrice"]>0.50) | (df.corr()["SalePrice"]<-0.50)].index)
 selected_cat_cols = [
-    'MSZoning', 'Utilities', 'BldgType', 'Heating', 'SaleType', 'SaleCondition'
+    'MSZoning', 'Utilities', 'Neighborhood', 'Condition1', 'Condition2', 'BldgType', 'HouseStyle',
+    'RoofMatl', 'Exterior1st', 'ExterQual', 'ExterCond', 'BsmtQual', 'BsmtCond', 'Heating', 'HeatingQC',
+    'CentralAir', 'Electrical', 'KitchenQual', 'SaleType', 'SaleCondition'
 ]
 r = ['MSZoning', 'Utilities', 'Neighborhood', 'Condition1', 'Condition2', 'BldgType', 'HouseStyle',
     'RoofMatl', 'Exterior1st', 'ExterQual', 'ExterCond', 'BsmtQual', 'BsmtCond', 'Heating', 'HeatingQC',
