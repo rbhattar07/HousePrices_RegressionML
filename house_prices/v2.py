@@ -18,12 +18,18 @@ from xgboost import XGBRegressor
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.model_selection import train_test_split, cross_val_score
 
-inputs = pd.read_csv('train_inputs.csv')
-target = pd.read_csv('train_target.csv')
-target.drop(columns='Unnamed: 0', inplace=True)
+train_inputs = pd.read_csv('train_inputs.csv')
+val_inputs = pd.read_csv('val_inputs.csv')
+train_target = pd.read_csv('train_target.csv')
+train_target.drop(columns='Unnamed: 0', inplace=True)
+val_target = pd.read_csv('val_target.csv')
+val_target.drop(columns='Unnamed: 0', inplace=True)
 
-# Train val Split
-train_inputs, val_inputs, train_target, val_target = train_test_split(inputs, target, test_size=0.95, random_state=42)
+print(train_inputs.shape)
+print(val_inputs.shape)
+print(train_target.shape)
+print(val_target.shape)
+
 
 def evaluation(targets, predictions):
     mae= mean_absolute_error(targets, predictions)
