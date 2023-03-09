@@ -94,7 +94,7 @@ print('MAPE',mape)
 print('-'*30)
 
 # Random Forest Regressor
-rfr = RandomForestRegressor().fit(train_inputs, train_target)
+rfr = RandomForestRegressor(criterion='poisson', max_depth=50).fit(train_inputs, train_target)
 val_preds = rfr.predict(val_inputs)
 print('Random Forest Regressor: ')
 mae, mse, mxe, r2s, mape = evaluation(val_target, val_preds)
