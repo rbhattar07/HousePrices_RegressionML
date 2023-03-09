@@ -19,15 +19,20 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.model_selection import train_test_split, cross_val_score
 
 train_inputs = pd.read_csv('train_inputs.csv')
+train_inputs.drop(columns='Unnamed: 0', inplace=True)
 val_inputs = pd.read_csv('val_inputs.csv')
+val_inputs.drop(columns='Unnamed: 0', inplace=True)
 train_target = pd.read_csv('train_target.csv')
 train_target.drop(columns='Unnamed: 0', inplace=True)
 val_target = pd.read_csv('val_target.csv')
 val_target.drop(columns='Unnamed: 0', inplace=True)
 
+print(train_inputs.isna().sum())
+print(val_inputs.isna().sum())
+
 print(train_inputs.shape)
-print(val_inputs.shape)
 print(train_target.shape)
+print(val_inputs.shape)
 print(val_target.shape)
 
 
@@ -123,3 +128,15 @@ print('MXE',mxe)
 print('r2s',r2s)
 print('MAPE',mape)
 print('-'*30)
+
+dict1 = {
+    'lr':lr,
+    'ridge':ridge,
+    'lasso':lasso,
+    'en': en,
+    'rfr':rfr,
+    'svm':svr,
+    'xgb':xgb
+}
+
+joblib.dump(dict1, 'dict1.joblib')
